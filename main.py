@@ -1,7 +1,4 @@
 #arquivo proncipal do projeto
-class DisjointSet:
-    pass
-
 class Heuristica:
     def ha():
         pass
