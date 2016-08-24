@@ -1,19 +1,20 @@
 #arquivo proncipal do projeto
-class Heuristica:
+class DisjointSet:
     pass
 
+class Heuristica:
+    def ha():
+        pass
 
 class Node(object):
-    def __init__(x, y):
+    def __init__(self,x, y):
         self.x = x
         self.y = y
-        self.f = 0
         self.g = 0
         self.h = 0
 
     def get_f(self):
-        self.f = self.g + self.h
-        return self.f
+        return self.g + self.h
 
 
 
@@ -41,6 +42,7 @@ class Lista(object):
     def insert(self, node, sort = False):
         #ordena no final?
         self.lista.append(node)
+
         if sort ==  True:
             self.sort()
 
@@ -49,9 +51,9 @@ class Lista(object):
         def order_element(n):
             return n.get_f()
 
-        sorted(self.lista, key=order_element)
+        self.lista = sorted(self.lista, key=order_element)
 
-    def print_all():
+    def print_all(self):
         for i in self.lista:
             print(i.x, i.y, i.get_f())
 
@@ -60,6 +62,12 @@ def a_pathfinding(from_node, to_node):
     lista_aberta = Lista()
     lista_fechada = Lista()
 
+lista_test = Lista()
+for i in range(10):
+    n = Node(0,i)
+    n.g = i
+    lista_test.insert(n, sort=True)
 
+lista_test.print_all()
 
 #
