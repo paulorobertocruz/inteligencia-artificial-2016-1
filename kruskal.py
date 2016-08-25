@@ -47,10 +47,7 @@ def Kruskal(gr):
     for e in all_edges:
         if dis_set.find(e.vertex_a) != dis_set.find(e.vertex_b):
             mst_adges.append(e)
-            dis_set.union(e.vertex_a, e.vertex_b)
-            print(dis_set.find(e.vertex_a), dis_set.find(e.vertex_b))
-        else:
-            print("false")
+            dis_set.union(e.vertex_a, e.vertex_b)            
     return mst_adges
 
 
