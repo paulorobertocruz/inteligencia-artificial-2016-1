@@ -17,6 +17,11 @@ class DisjointSets:
             return self.parent[set]
         else:
             return self.find(self.parent[set])
+    def set_exist(self, set):
+        if set in self.parent:
+            return True
+        else:
+            return False
 
     def union(self, set_a, set_b):
         ra = self.find(set_a)
@@ -47,7 +52,7 @@ def Kruskal(gr):
     for e in all_edges:
         if dis_set.find(e.vertex_a) != dis_set.find(e.vertex_b):
             mst_adges.append(e)
-            dis_set.union(e.vertex_a, e.vertex_b)            
+            dis_set.union(e.vertex_a, e.vertex_b)
     return mst_adges
 
 
