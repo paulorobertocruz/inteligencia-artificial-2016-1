@@ -59,12 +59,5 @@ def a_pathfinding(from_node, to_node):
     lista_aberta = Lista()
     lista_fechada = Lista()
 
-lista_test = Lista()
-for i in range(10):
-    n = Node(0,i)
-    n.g = i
-    lista_test.insert(n, sort=True)
-
-lista_test.print_all()
 
 #
