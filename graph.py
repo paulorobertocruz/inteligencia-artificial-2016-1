@@ -17,4 +17,10 @@ class Graph:
 
     def add_adge(self, edge):
         self.edges.append(edge)
-        pass
+
+    def get_connected_to(self, vertex):
+        edges = []
+        for e in self.edges:
+            if e.vertex_a == vertex or e.vertex_b == vertex:
+                edges.append(e)
+        return edges
