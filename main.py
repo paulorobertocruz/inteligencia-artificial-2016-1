@@ -1,7 +1,8 @@
 #arquivo proncipal do projeto
-class Heuristica:
-    def ha():
-        pass
+
+from kruskal import Kruskal
+from graph import Graph
+from graph import Edge
 
 class Node(object):
     def __init__(self,x, y):
@@ -12,21 +13,6 @@ class Node(object):
 
     def get_f(self):
         return self.g + self.h
-
-
-
-class Mapa:
-    def __init__(width, height):
-        self.width = width
-        self.height = height
-
-        #gera matriz vasia
-        self.matrix = [ [0 for _ in range(height)] for _ in range(width)]
-        self.nodes = [node() for _ in range(height * width)]
-    def reset():
-        #limpa o map
-        pass
-
 
 class Lista(object):
 
