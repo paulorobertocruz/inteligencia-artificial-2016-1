@@ -1,33 +1,35 @@
-import .graph
+import graph
 
 class DisjointSets:
     def __init__(self):
         #gr graph
         self.parent = {}
-        self.set = {}
+        self.set = []
         self.rank = {}
 
     def add_set(self, v):
         self.set.append(v)
-        self.parent[v]=v
+        self.parent[v] = v
         self.rank[v]=0
 
     def find(self, set):
         if self.parent[set] == set:
-            return set
+            return self.parent[set]
         else:
-            return find(parent[set])
+            return self.find(self.parent[set])
 
     def union(self, set_a, set_b):
-        if rank[set_a] > rank[set_b]:
-            parent[set_a] = set_b
-        elif rank[set_b] > rank[set_a]:
-            parent[set_b] = set_a
+        ra = self.find(set_a)
+        rb = self.find(set_b)
+        if self.rank[ra] > self.rank[rb]:
+            self.parent[rb] = ra
+        elif self.rank[rb] > self.rank[ra]:
+            self.parent[ra] = rb
         else:
-            parent[set_a] = set_b
-            rank[set_b]+= 1
+            self.parent[ra] = rb
+            self.rank[rb]+= 1
 
-def kruskal(gr):
+def Kruskal(gr):
     #lista de arestas da mst
     mst_adges = []
 
@@ -35,15 +37,20 @@ def kruskal(gr):
 
     for v in gr.verticeis:
         dis_set.add_set(v)
+
     #ordena todas as arestas em order crescente
     def order_element(edge):
         return edge.weigth
+
     all_edges = sorted(gr.edges, key=order_element)
 
     for e in all_edges:
         if dis_set.find(e.vertex_a) != dis_set.find(e.vertex_b):
             mst_adges.append(e)
             dis_set.union(e.vertex_a, e.vertex_b)
+            print(dis_set.find(e.vertex_a), dis_set.find(e.vertex_b))
+        else:
+            print("false")
     return mst_adges
 
 
