@@ -55,6 +55,28 @@ def Kruskal(gr):
             dis_set.union(e.vertex_a, e.vertex_b)
     return mst_adges
 
+def Kruskal_Unvisited(gr):
+    #lista de arestas da mst
+    mst_adges = []
+
+    dis_set = DisjointSets()
+
+    for v in gr.verticeis:
+        if not gr.is_visited_vertex(v):
+            dis_set.add_set(v)
+
+    #ordena todas as arestas em order crescente
+    def order_element(edge):
+        return edge.weigth
+
+    all_edges = sorted(gr.get_unvisited_edges(), key=order_element)
+
+    for e in all_edges:
+        if dis_set.find(e.vertex_a) != dis_set.find(e.vertex_b):
+            mst_adges.append(e)
+            dis_set.union(e.vertex_a, e.vertex_b)
+    return mst_adges
+
 
 
 
