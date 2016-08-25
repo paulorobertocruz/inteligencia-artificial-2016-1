@@ -34,7 +34,7 @@ def kruskal(gr):
     dis_set = DisjointSets()
 
     for v in gr.verticeis:
-        dis_set.set(v)
+        dis_set.add_set(v)
     #ordena todas as arestas em order crescente
     def order_element(edge):
         return edge.weigth
