@@ -1,6 +1,6 @@
 #arquivo proncipal do projeto
 
-# from kruskal import Kruskal
+from kruskal import Kruskal_Unvisited
 # from graph import Graph
 # from graph import Edge
 
@@ -42,8 +42,8 @@ class Lista(object):
     def inlist(self, node):
         for l in self.lista:
             if node.vertex == l.vertex:
-                return True
-        return False
+                return l
+        return None
 
     def get_node_from_vertex(self):
         return 0
@@ -62,15 +62,42 @@ def a_star(graph_g, from_node):
             return node.parent.g + ec
 
 
-    def h():
-        return 0
+    def h(node):
+        hc = 0
+
+        edges = graph_g.get_connected_to(node.vertex)
+
+        neares_cost = None
+        print(node.vertex)
+        for e in edges:
+            if e.vertex_a == node.vertex:
+                nv = graph_g.is_visited_vertex(e.vertex_b)
+            else:
+                nv = graph_g.is_visited_vertex(e.vertex_a)
+
+            if nv:
+                #ja foi visitada
+                continue
+            else:
+                #não foi visitada
+                neares_cost = e.weigth
+        print(neares_cost)
+        hc = hc + neares_cost
+        mst = Kruskal_Unvisited(graph_g)
+        mst_cost = 0
+
+        for e in mst:
+            mst_cost += e.weigth
+
+        hc += mst_cost
+        return hc
 
     lista_aberta = Lista(True)
 
     lista_fechada = Lista(False)
 
     from_node.g = g(from_node, 0)
-    from_node.h = h()
+    from_node.h = h(from_node)
 
     lista_aberta.insert(from_node)
 
@@ -89,17 +116,22 @@ def a_star(graph_g, from_node):
                 edge_cost = e.weigth
                 nnode = Node(e.vertex_a, n)
 
+            nnode.g = g(nnode, edge_cost)
+            nnode.h = h(nnode)
+
             # se estiver na lista fechada não sera computado novamente
-            if lista_fechada.inlist(nnode) == False:
+            if lista_fechada.inlist(nnode) is None:
                 # se estiver na lista aberta podera ser reparenteado
-                if lista_aberta.inlist(nnode):
-                    if nnode.get_f() < lista_fechada.get_node_from_vertex():
-                        pass
+                list_node = lista_aberta.inlist(nnode)
+                if list_node is not None:
+                    if nnode.get_f() < list_node.get_f():
+                        list_node.parent = nnode.parent
+                        list_node.g = nnode.g
+                        list_node.h = nnode.h
                 else:
-                    nnode.g = g(nnode, edge_cost)
-                    nnode.h = h()
                     lista_aberta.insert(nnode)
         lista_fechada.insert(n)
+        graph_g.set_visited(n.vertex)
     return lista_fechada
 
 
