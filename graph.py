@@ -1,4 +1,4 @@
-class Edge:
+class Edge(object):
     def __init__(self, weight, vertex_a, vertex_b):
         self.weigth = weigth
         self.vertex_a = vertex_a
